@@ -2,6 +2,7 @@ const { NlpManager } = require('node-nlp')
 const express = require('express');
 const mgr = new NlpManager(({ languages: ['en', 'vn'] }))
 const app = express()
+const serverless = require('serverless-http')
 mgr.addDocument('en', 'hello', 'greeting')
 mgr.addDocument('en', 'hi', 'greeting')
 mgr.addDocument('en', 'good morning', 'greeting')
@@ -28,14 +29,19 @@ mgr.addAnswer('en', 'feeling', 'Great!')
 mgr.addAnswer('vn', 'greeting-vn', 'Xin chao')
 mgr.addAnswer('vn', 'greeting-vn', 'Chao ban')
 
+const router = express.Router()
 
 mgr.train().then(async () => {
     mgr.save()
-    app.get('/bot', async(req, res) => {
+    router.get('/bot', async(req, res) => {
         let resp = await mgr.process('en', req.query.message)
         res.send(resp.answer)
     })
     
+    app.use('/.netlify/',router)
+
     app.listen(3000)
 
 })
+
+module.exports.handler = serverless(app)
