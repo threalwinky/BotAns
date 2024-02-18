@@ -4,6 +4,7 @@
     "node-nlp": "^4.27.0"
   },
   "scripts": {
-    "start" : "node index"
+    "start" : "node index",
+    "build" : "node index"
   }
 }
