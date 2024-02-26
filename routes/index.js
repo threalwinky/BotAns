@@ -37,9 +37,9 @@ mgr.train().then(async () => {
 //     res.json({message : 'hello'})
 // })
   router.get('/',async (req, res) => {
-      // res.send('Working')
-      // let resp = await mgr.process('en', req.query.message)
-      res.send('Work')
+      res.send('Working')
+      let resp = await mgr.process('en', req.query.message)
+      // res.send('Work')
       // res.json({message : 'hello'})
   })
   
