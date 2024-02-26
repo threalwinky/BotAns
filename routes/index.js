@@ -33,9 +33,13 @@ mgr.addAnswer('vn', 'greeting-vn', 'Chao ban')
 
 mgr.train().then(async () => {
   mgr.save()
+//   router.get('/',async (req, res) => {
+//     res.json({message : 'hello'})
+// })
   router.get('/',async (req, res) => {
-      let resp = await mgr.process('en', req.query.message)
-      res.send(resp.answer)
+      // res.send('Working')
+      // let resp = await mgr.process('en', req.query.message)
+      res.send('Work')
       // res.json({message : 'hello'})
   })
   
